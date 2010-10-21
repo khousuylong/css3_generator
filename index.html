@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Another CSS3 generator</title>
+<!--		<link type="text/css" rel="stylesheet" href="sh_hili/styles/sh_berries-dark.css">-->
+		<link rel="stylesheet" type="text/css" href="lib/yoolkui/css/yoolk-ui_min_0.3.14.css" />
+		<script type="text/javascript" src="lib/yoolkui/src/yoolk-ui_min_0.3.14.js"></script>
+		<script type="text/javascript" src="lib/jscolor/jscolor.js"></script>
+		<style>
+
+			.yk_window_header_base{
+				background-image: -moz-linear-gradient(19% 100% 90deg,#FFFFFF, #2783AB, #F2F2F2 100%);
+				background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#BFBFBF), to(#BABABA), color-stop(.5,#2B2B2B));
+			}
+
+		</style>
+	   
+		<script type="text/javascript" src="widget_list.js"></script>
+		<script>
+			window.onload = function(){
+
+				 var hPaned = new YK.HPaned();
+
+					listPanel = new YK.Panel("CSS3 Features");
+						var scroller = new YK.VScroller();
+						 	var treeview = new YK.TreeView();
+							//setModel
+							treeview.setModel(model);
+						scroller.appendChild(treeview, true);
+					listPanel.appendChild(scroller);
+					listPanel.disableCloseButton(); 
+
+				hPaned.pack1(listPanel, true, false);
+					var vBox = new YK.VBoxFactory(true, 5);
+						var hBox = new YK.HBoxFactory(false, 5);
+								var generatorPanel = new YK.Panel("GENERATOR");
+								generatorPanel.disableCloseButton();
+									generatorScroller = new YK.VScroller();
+										generatorScroller.getNode().setAttribute("id", "show_content_area");
+									generatorScroller.appendChild(new YK.Label("generator"), true);
+
+								generatorPanel.appendChild(generatorScroller);
+
+						hBox.appendChild(generatorPanel, {"expand": true, "fill": true});
+							var outputPanel = new YK.Panel("OUTPUT");
+								outputPanel.disableCloseButton();
+
+									outputScroller = new YK.VScroller();
+									outputScroller.getNode().setAttribute("id", "show_content_area");
+									outputScroller.appendChild(new YK.Label("output"), true);
+
+							outputPanel.appendChild(outputScroller);							
+						hBox.appendChild(outputPanel, {"expand": true, "fill": true});
+
+					vBox.appendChild(hBox, {"expand": true, "fill": true});
+						var codePanel = new YK.Panel("CSS3");
+						codePanel.disableCloseButton();
+							codeScroller = new YK.VScroller();
+								codeScroller.getNode().setAttribute("id", "show_content_area");
+							codeScroller.appendChild(new YK.Label("css3 for all supported browsers"), true);
+
+						codePanel.appendChild(codeScroller);
+					vBox.appendChild(codePanel, {"expand": true, "fill": true});
+				hPaned.pack2(vBox, true, false);
+				hPaned.setPosition(250);
+
+				hPaned.resizeWidth(window.innerWidth - 2);
+				hPaned.resizeHeight(window.innerHeight - 4);
+				hPaned.getNode().style.paddingLeft = "1px";
+
+				document.body.appendChild(hPaned.getNode());
+
+				treeview.connect("nodeselected", function(value){
+					var newScript = createHeaderScriptTag(value["src"])
+		 			src = value["src"];
+					newScript.onload = function(){
+						generatorScroller.appendChild(generatorBox, true);
+						outputScroller.appendChild(outputBox, true);
+					};
+				});
+		};
+
+		var createHeaderScriptTag = function(src){
+			var headID = document.getElementsByTagName("head")[0];
+				var newScript = document.createElement('script');
+				newScript.type = 'text/javascript';
+				newScript.src = src;
+				newScript.id = "new_script";
+
+			var oldScript = document.getElementById("new_script");
+			if(oldScript) headID.removeChild(oldScript);
+
+			headID.appendChild(newScript);
+			return newScript;
+		};
+
+		var createWindowContent = function(src){
+			sc = processAjaxRequest(src);
+			var sourceCode = "<pre class='sh_javascript'>" + sc.substring(sc.indexOf("/*code_section*/"), sc.indexOf("/*end_code_section*/")).replace("/*code_section*/", "") + "</pre>";
+			return sourceCode;
+		};
+
+		var XMLHttpFactories = [
+            function () {return new XMLHttpRequest()},
+            function () {return new ActiveXObject("Msxml2.XMLHTTP")},
+            function () {return new ActiveXObject("Msxml3.XMLHTTP")},
+            function () {return new ActiveXObject("Microsoft.XMLHTTP")}
+        	];
+
+        var createXMLHTTPObject = function(){
+            var xmlhttp = false;
+            for (var i=0;i<XMLHttpFactories.length;i++) {
+                try {
+	                xmlhttp = XMLHttpFactories[i]();
+                }
+                catch (e) {
+	                continue;
+                }
+                break;
+            }
+            return xmlhttp;
+        };
+
+			var processAjaxRequest = function(ajaxPage){
+                var xmlObj = createXMLHTTPObject();
+		            xmlObj.open('GET', ajaxPage, false );
+		            xmlObj.setRequestHeader('Content-Type', 'text/html');
+		            xmlObj.send(null);
+                return xmlObj.responseText;
+            };
+		</script>
+</head>
+	<body scroll="no" style="overflow: hidden">
+<!--		<input class="color {pickerMode:'HSV'}" value="66ff00">-->
+	</body>
+</html>
