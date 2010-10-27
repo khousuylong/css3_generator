@@ -4,9 +4,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Another CSS3 generator</title>
 <!--		<link type="text/css" rel="stylesheet" href="sh_hili/styles/sh_berries-dark.css">-->
-		<link rel="stylesheet" type="text/css" href="lib/yoolkui/css/yoolk-ui_min_0.3.14.css" />
-		<script type="text/javascript" src="lib/yoolkui/src/yoolk-ui_min_0.3.14.js"></script>
+		<link rel="stylesheet" type="text/css" href="lib/yoolkui/css/yoolk-ui_min_0.3.16.css" />
+		<script type="text/javascript" src="lib/yoolkui/src/yoolk-ui_min_0.3.16.js"></script>
 		<script type="text/javascript" src="lib/jscolor/jscolor.js"></script>
+
+		<script type="text/javascript" src="javascript/css.js"></script>
 		<style>
 
 			.yk_window_header_base{
@@ -72,11 +74,15 @@
 				document.body.appendChild(hPaned.getNode());
 
 				treeview.connect("nodeselected", function(value){
-					var newScript = createHeaderScriptTag(value["src"])
-		 			src = value["src"];
-					newScript.onload = function(){
-						generatorScroller.appendChild(generatorBox, true);
-						outputScroller.appendChild(outputBox, true);
+
+					var outputScript = createHeaderScriptTag(value["output"]);
+					outputScript.onload = function(){
+						outputScroller.appendChild(new CSS3.outputBox);
+					};
+
+					var generatorScript = createHeaderScriptTag(value["generator"]);
+					generatorScript.onload = function(){
+						generatorScroller.appendChild(new CSS3.generatorBox(), true);
 					};
 				});
 		};
@@ -122,13 +128,13 @@
             return xmlhttp;
         };
 
-			var processAjaxRequest = function(ajaxPage){
-                var xmlObj = createXMLHTTPObject();
-		            xmlObj.open('GET', ajaxPage, false );
-		            xmlObj.setRequestHeader('Content-Type', 'text/html');
-		            xmlObj.send(null);
-                return xmlObj.responseText;
-            };
+		var processAjaxRequest = function(ajaxPage){
+            var xmlObj = createXMLHTTPObject();
+	            xmlObj.open('GET', ajaxPage, false );
+	            xmlObj.setRequestHeader('Content-Type', 'text/html');
+	            xmlObj.send(null);
+            return xmlObj.responseText;
+        };
 		</script>
 </head>
 	<body scroll="no" style="overflow: hidden">
