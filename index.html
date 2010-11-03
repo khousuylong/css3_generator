@@ -34,7 +34,7 @@
 					listPanel.disableCloseButton(); 
 
 				hPaned.pack1(listPanel, true, false);
-					var vBox = new YK.VBoxFactory(true, 5);
+					var vBox = new YK.VBoxFactory(false, 5);
 						var hBox = new YK.HBoxFactory(false, 5);
 								var generatorPanel = new YK.Panel("GENERATOR");
 								generatorPanel.disableCloseButton();
@@ -57,13 +57,14 @@
 
 					vBox.appendChild(hBox, {"expand": true, "fill": true});
 						var codePanel = new YK.Panel("CSS3");
+						codePanel.resetMinHeight(250);
 						codePanel.disableCloseButton();
 							codeScroller = new YK.VScroller();
 								codeScroller.getNode().setAttribute("id", "show_content_area");
 							codeScroller.appendChild(new YK.Label("css3 for all supported browsers"), true);
 
 						codePanel.appendChild(codeScroller);
-					vBox.appendChild(codePanel, {"expand": true, "fill": true});
+					vBox.appendChild(codePanel, {"expand": false, "fill": false});
 				hPaned.pack2(vBox, true, false);
 				hPaned.setPosition(250);
 
@@ -74,6 +75,11 @@
 				document.body.appendChild(hPaned.getNode());
 
 				treeview.connect("nodeselected", function(value){
+
+					var cssCodeScript = createHeaderScriptTag(value["cssCode"]);
+					cssCodeScript.onload = function(){
+						codeScroller.appendChild(new CSS3.cssCode(), true);
+					};
 
 					var outputScript = createHeaderScriptTag(value["output"]);
 					outputScript.onload = function(){
@@ -101,40 +107,6 @@
 			return newScript;
 		};
 
-		var createWindowContent = function(src){
-			sc = processAjaxRequest(src);
-			var sourceCode = "<pre class='sh_javascript'>" + sc.substring(sc.indexOf("/*code_section*/"), sc.indexOf("/*end_code_section*/")).replace("/*code_section*/", "") + "</pre>";
-			return sourceCode;
-		};
-
-		var XMLHttpFactories = [
-            function () {return new XMLHttpRequest()},
-            function () {return new ActiveXObject("Msxml2.XMLHTTP")},
-            function () {return new ActiveXObject("Msxml3.XMLHTTP")},
-            function () {return new ActiveXObject("Microsoft.XMLHTTP")}
-        	];
-
-        var createXMLHTTPObject = function(){
-            var xmlhttp = false;
-            for (var i=0;i<XMLHttpFactories.length;i++) {
-                try {
-	                xmlhttp = XMLHttpFactories[i]();
-                }
-                catch (e) {
-	                continue;
-                }
-                break;
-            }
-            return xmlhttp;
-        };
-
-		var processAjaxRequest = function(ajaxPage){
-            var xmlObj = createXMLHTTPObject();
-	            xmlObj.open('GET', ajaxPage, false );
-	            xmlObj.setRequestHeader('Content-Type', 'text/html');
-	            xmlObj.send(null);
-            return xmlObj.responseText;
-        };
 		</script>
 </head>
 	<body scroll="no" style="overflow: hidden">

@@ -35,18 +35,20 @@ CSS3.outputBox = function(){
 CSS3.outputBox.prototype._changeGradient = function(gradientObj){
 	var obj = gradientObj;
 	var backgroundImage = 
-		"-moz-linear-gradient(" + 
-		Math.floor( obj['vPosition'] ) + "% " + 
-		Math.floor( obj['hPosition'] ) + "% " + 
-		Math.floor( obj['angle'] ) + "deg,#" + 
-		obj['startColor'] + ", #" + 
-		obj['endColor'] + ", ";
+		"-webkit-gradient(linear, " + 
+		Math.floor( obj['hPositionStart'] ) + "% " +
+		Math.floor( obj['vPositionStart'] ) + "%, " +
+		Math.floor( obj['hPositionEnd'] ) + "% " +
+		Math.floor( obj['vPositionEnd'] ) + "%, " +
+		"from(#" + obj['startColor'] + "), " +
+		"to(#" + obj['endColor'] + "), ";
 		
 	var stopProperties = gradientObj['stopProperties'];
 	for(var i = 0, len = stopProperties.length; i < len; i++){
-		backgroundImage += "#" + stopProperties[i]['stopColor'] + " " + Math.floor( stopProperties[i]['stopScale'] ) + "%,";
+		backgroundImage += "color-stop(."+ Math.floor( stopProperties[i]['stopScale'] * 10 ) +", #" + stopProperties[i]['stopColor'] + "),";	
 	}
 	backgroundImage = backgroundImage.substring(0, backgroundImage.length - 1) + ")";
-	this._divGradient.style.backgroundImage = backgroundImage 
+	
+	this._divGradient.style.backgroundImage = backgroundImage ;
 	YK.Event.triggerPublicListener("csscodechanged", backgroundImage);
 };
