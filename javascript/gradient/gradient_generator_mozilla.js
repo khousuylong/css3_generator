@@ -158,15 +158,18 @@ CSS3.generatorBox.prototype._createStopElement = function(){
 			var positionScale = new YK.Scale(0, 100);
 			stopObj["stopScale"] = 0;
 			positionScale.resetMinWidth(200);
+			positionScale.setScale(50);
 			positionScale.connect("changed", function(currentScale){
 				stopObj["stopScale"] = currentScale;
 				YK.Event.triggerPublicListener("gradientchanged", self._linearGradient);
 				positionEntry.setText( Math.floor( currentScale ) );
 			});
+			stopObj["stopScale"] = 50;
 		hbox.appendChild(positionScale, {"expand": false, "fill": false});
 
 			var positionEntry = new YK.Entry();
 			positionEntry.resetMinWidth(40);
+			positionEntry.setText(50);
 		hbox.appendChild(positionEntry, {"expand": false, "fill": false});
 		hbox.appendChild(new YK.Label("%"), {"expand": false, "fill": false});
 
