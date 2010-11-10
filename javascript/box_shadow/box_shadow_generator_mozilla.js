@@ -30,7 +30,7 @@ CSS3.generatorBox = function(){
 				var horizonyalLengthLabel = new YK.Label("Horizontal Length:");
 				horizonyalLengthLabel.setJustify(YK.JUSTIFY_RIGHT);
 
-				var hScale = new YK.Scale(0, 100);
+				var hScale = new YK.Scale(-100, 100);
 				hScale.resetMinWidth(200);
 				hScale.connect("changed", function(currentScale){
 					self._boxShadow["hScale"] = currentScale;
@@ -46,7 +46,7 @@ CSS3.generatorBox = function(){
 				var VerticalLengthLabel = new YK.Label("Vertical Length:");
 				VerticalLengthLabel.setJustify(YK.JUSTIFY_RIGHT);
 
-				var vScale = new YK.Scale(0, 100);
+				var vScale = new YK.Scale(-100, 100);
 				vScale.resetMinWidth(200);
 				vScale.connect("changed", function(currentScale){
 					self._boxShadow["vScale"] = currentScale;
@@ -94,7 +94,6 @@ CSS3.generatorBox = function(){
 	startFrame.appendChild(startTableWidget)
 
 	mainVBox.appendChild(startFrame, {"expand": false, "fill": false});
-	console.log(this._boxShadow);
 	YK.Event.triggerPublicListener("boxshadowchanged", this._boxShadow);
 
 	return mainVBox;

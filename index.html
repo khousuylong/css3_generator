@@ -4,8 +4,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Another CSS3 generator</title>
 <!--		<link type="text/css" rel="stylesheet" href="sh_hili/styles/sh_berries-dark.css">-->
-		<link rel="stylesheet" type="text/css" href="lib/yoolkui/css/yoolk-ui_min_0.3.16.css" />
-		<script type="text/javascript" src="lib/yoolkui/src/yoolk-ui_min_0.3.16.js"></script>
+		<link rel="stylesheet" type="text/css" href="lib/yoolkui/css/yoolk-ui_min_0.5.23.css" />
+		<script type="text/javascript" src="lib/yoolkui/src/yoolk-ui_min_0.5.23.js"></script>
 		<script type="text/javascript" src="lib/jscolor/jscolor.js"></script>
 
 		<script type="text/javascript" src="javascript/css.js"></script>
@@ -45,19 +45,15 @@
 								generatorPanel.appendChild(generatorScroller);
 
 						hBox.appendChild(generatorPanel, {"expand": true, "fill": true});
-							var outputPanel = new YK.Panel("OUTPUT");
+							var outputPanel = new YK.Panel("OUTPUT", 30);
 								outputPanel.disableCloseButton();
 
-									outputScroller = new YK.VScroller();
-									outputScroller.getNode().setAttribute("id", "show_content_area");
-									outputScroller.appendChild(new YK.Label("output"), true);
-
-							outputPanel.appendChild(outputScroller);							
+							outputPanel.appendChild(new YK.Label("output"));							
 						hBox.appendChild(outputPanel, {"expand": true, "fill": true});
 
 					vBox.appendChild(hBox, {"expand": true, "fill": true});
 						var codePanel = new YK.Panel("CSS3");
-						codePanel.resetMinHeight(250);
+						codePanel.resetMinHeight(200);
 						codePanel.disableCloseButton();
 							codeScroller = new YK.VScroller();
 								codeScroller.getNode().setAttribute("id", "show_content_area");
@@ -66,7 +62,7 @@
 						codePanel.appendChild(codeScroller);
 					vBox.appendChild(codePanel, {"expand": false, "fill": false});
 				hPaned.pack2(vBox, true, false);
-				hPaned.setPosition(250);
+				hPaned.setPosition(200);
 
 				hPaned.resizeWidth(window.innerWidth - 2);
 				hPaned.resizeHeight(window.innerHeight - 4);
@@ -83,7 +79,7 @@
 
 					var outputScript = createHeaderScriptTag(value["output"]);
 					outputScript.onload = function(){
-						outputScroller.appendChild(new CSS3.outputBox);
+						outputPanel.appendChild(new CSS3.outputBox);
 					};
 
 					var generatorScript = createHeaderScriptTag(value["generator"]);
