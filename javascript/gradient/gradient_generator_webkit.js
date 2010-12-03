@@ -19,8 +19,8 @@ CSS3.generatorBox = function(){
 			});
 			var inputDomStartColorEntry = startColorEntry.getNode().firstChild.firstChild;
 			var myPicker = new jscolor.color(inputDomStartColorEntry, {});
-			myPicker.fromString('40B9FF');
-			this._linearGradient["startColor"] = "40B9FF"
+			myPicker.fromString('C9C9C9');
+			this._linearGradient["startColor"] = "C9C9C9"
 
 		startTableWidget.attach(startColorEntry, 1, 2, 0, 1, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
 
@@ -34,12 +34,12 @@ CSS3.generatorBox = function(){
 				YK.Event.triggerPublicListener("gradientchanged", self._linearGradient);
 				hPositionEntry.setText( Math.floor( currentScale ) );
 			});
-			hPositionScale.setScale(50);
-			this._linearGradient["hPositionStart"] = 50;
+			hPositionScale.setScale(85);
+			this._linearGradient["hPositionStart"] = 85;
 
 		startTableWidget.attach(hPositionScale, 1, 2, 2, 3, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
 			var hPositionEntry = new YK.Entry();
-			hPositionEntry.setText(50);
+			hPositionEntry.setText(85);
 			hPositionEntry.resetMinWidth(40);
 		startTableWidget.attach(hPositionEntry, 2, 3, 2, 3, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
 		startTableWidget.attach(new YK.Label("%"), 3, 4, 2, 3, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
@@ -83,8 +83,8 @@ CSS3.generatorBox = function(){
 
 			var inputDomEndColorEntry = endColorEntry.getNode().firstChild.firstChild;
 			var myPicker = new jscolor.color(inputDomEndColorEntry, {});
-			myPicker.fromString('B8EAFF');
-			this._linearGradient["endColor"] = "B8EAFF";
+			myPicker.fromString('7D7D7D');
+			this._linearGradient["endColor"] = "7D7D7D";
 
 		endTableWidget.attach(endColorEntry, 1, 2, 1, 2, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
 			
@@ -167,8 +167,8 @@ CSS3.generatorBox.prototype._createStopElement = function(){
 			stopColorEntry.resetMinWidth(70);
 			var inputDomStopColorEntry = stopColorEntry.getNode().firstChild.firstChild;
 			var myPicker = new jscolor.color(inputDomStopColorEntry, {});
-			myPicker.fromString("F0FFFD");
-			stopObj["stopColor"] = "F0FFFD"
+			myPicker.fromString("A1A1A1");
+			stopObj["stopColor"] = "A1A1A1"
 			stopColorEntry.connect("focused", function(value){
 				stopObj["stopColor"] = value;
 				YK.Event.triggerPublicListener("gradientchanged", self._linearGradient);

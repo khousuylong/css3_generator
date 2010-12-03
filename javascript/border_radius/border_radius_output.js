@@ -17,8 +17,8 @@ CSS3.outputBox = function(){
 			divTextShadowStyle.fontSize = "40px";
 			divTextShadowStyle.fontWeight = "bold";
 			divTextShadowStyle.verticalAlign = "middle";
-			divTextShadowStyle.width = "100px";
-			divTextShadowStyle.height = "200px";
+			divTextShadowStyle.width = "400px";
+			divTextShadowStyle.height = "100px";
 			divTextShadowStyle.border = "1px solid #D5D5D5";
 		this._domObj.appendChild(this._divTextShadow);
 	this._vbox.appendChild(this._domObj, {"expand": false, "fill": false});
@@ -30,26 +30,31 @@ CSS3.outputBox = function(){
 };
 
 CSS3.outputBox.prototype._changeGradient = function(borderRadiusObj){
-	var obj = borderRadiusObj;
-	var divTextShadowStyle = this._divTextShadow.style;
 	
-	if( obj.hasOwnProperty("borderRadiusTopLeft") ){
-		divTextShadowStyle.MozBorderRadiusTopleft = Math.floor( obj['borderRadiusTopLeft'] ) + 'px';
-		divTextShadowStyle.MozBorderRadiusTopright = Math.floor( obj['borderRadiusTopRight'] ) + 'px';
-		divTextShadowStyle.MozBorderRadiusBottomleft = Math.floor( obj['borderRadiusBottomLeft'] ) + 'px';
-		divTextShadowStyle.MozBorderRadiusBottomright = Math.floor( obj['borderRadiusBottomRight'] ) + 'px';
+	if( borderRadiusObj.hasOwnProperty("borderRadiusTopLeft") )
+		this._makeDifRadius(borderRadiusObj);	
+	else 
+		this._makeEqualRadius(borderRadiusObj);
 
-		divTextShadowStyle.borderTopLeftRadius = Math.floor( obj['borderRadiusTopLeft'] ) + 'px';
-		divTextShadowStyle.borderTopRightRadius = Math.floor( obj['borderRadiusTopRight'] ) + 'px';
-		divTextShadowStyle.borderBottomLeftRadius = Math.floor( obj['borderRadiusBottomLeft'] ) + 'px';
-		divTextShadowStyle.borderBottomRightRadius = Math.floor( obj['borderRadiusBottomRight'] ) + 'px';
+	YK.Event.triggerPublicListener("csscodechanged_border_radius", borderRadiusObj);
+};
 
-	}else{
-		var borderRadius = Math.floor( obj["borderRadius"] ) + "px ";
-		divTextShadowStyle.WebkitBorderRadius = borderRadius;
-		divTextShadowStyle.MozBorderRadius = borderRadius;
-		divTextShadowStyle.BorderRadius = borderRadius;
-	}
+CSS3.outputBox.prototype._makeDifRadius = function(obj){
+	var divTextShadowStyle = this._divTextShadow.style;
+	divTextShadowStyle.MozBorderRadiusTopleft = Math.floor( obj['borderRadiusTopLeft'] ) + 'px';
+	divTextShadowStyle.MozBorderRadiusTopright = Math.floor( obj['borderRadiusTopRight'] ) + 'px';
+	divTextShadowStyle.MozBorderRadiusBottomleft = Math.floor( obj['borderRadiusBottomLeft'] ) + 'px';
+	divTextShadowStyle.MozBorderRadiusBottomright = Math.floor( obj['borderRadiusBottomRight'] ) + 'px';
 
-	YK.Event.triggerPublicListener("csscodechanged_border_radius", obj);
+	divTextShadowStyle.borderTopLeftRadius = Math.floor( obj['borderRadiusTopLeft'] ) + 'px';
+	divTextShadowStyle.borderTopRightRadius = Math.floor( obj['borderRadiusTopRight'] ) + 'px';
+	divTextShadowStyle.borderBottomLeftRadius = Math.floor( obj['borderRadiusBottomLeft'] ) + 'px';
+	divTextShadowStyle.borderBottomRightRadius = Math.floor( obj['borderRadiusBottomRight'] ) + 'px';
+};
+CSS3.outputBox.prototype._makeEqualRadius = function(obj){
+	var divTextShadowStyle = this._divTextShadow.style;
+	var borderRadius = Math.floor( obj["borderRadius"] ) + "px ";
+	divTextShadowStyle.WebkitBorderRadius = borderRadius;
+	divTextShadowStyle.MozBorderRadius = borderRadius;
+	divTextShadowStyle.BorderRadius = borderRadius;
 };

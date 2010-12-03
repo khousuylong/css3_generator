@@ -7,22 +7,19 @@ CSS3.outputBox = function(){
 	this._stopColor	 = "F0FFFD";
 	this._stopPosition = 100;
 	
-	this._vbox = new YK.VBoxFactory(false);
-		this._domObj = new YK.Dom(100, 150);
-			this._divBoxShadow = YK.domBuilder.create({'tag': 'div'});
-			this._divBoxShadow.style.width = "100px";
-			this._divBoxShadow.style.height = "100px";
-			this._divBoxShadow.style.WebkitBorderRadius = "6px";
-			this._divBoxShadow.style.MozBorderRadius = "6px";
-			this._divBoxShadow.style.BorderRadius = "6px";
-			this._divBoxShadow.style.border = "1px solid #D5D5D5";
-		this._domObj.appendChild(this._divBoxShadow);
-	this._vbox.appendChild(this._domObj, {"expand": false, "fill": false});
+	this._domWidget = new YK.Dom(300, 150);
+	this._domWidgetNodeStyle = this._domWidget.getNode().style;
+	this._domWidgetNodeStyle.WebkitBorderRadius = "6px";
+	this._domWidgetNodeStyle.MozBorderRadius = "6px";
+	this._domWidgetNodeStyle.BorderRadius = "6px";
+	this._domWidgetNodeStyle.border = "1px solid #D5D5D5";
+	this._domWidget.appendChild(YK.domBuilder.create({'tag': 'div'}));
+	
 	var self = this;
 	YK.Event.addPublicListener(this, "boxshadowchanged", function(gradientObj){
 		self._changeGradient(gradientObj);
 	});
-	return this._vbox;
+	return this._domWidget;
 };
 
 CSS3.outputBox.prototype._changeGradient = function(gradientObj){
@@ -35,8 +32,8 @@ CSS3.outputBox.prototype._changeGradient = function(gradientObj){
 		Math.floor( gradientObj["blurScale"] ) + "px #" +
 		gradientObj["boxShadowColor"];
 	if( YK.Util.detect.browser === "Firefox" )
-		this._divBoxShadow.style.MozBoxShadow = boxShadow;
+		this._domWidgetNodeStyle.MozBoxShadow = boxShadow;
 	if( YK.Util.detect.browser === "Chrome" )
-		this._divBoxShadow.style.WebkitBoxShadow = boxShadow;
+		this._domWidgetNodeStyle.WebkitBoxShadow = boxShadow;
 	YK.Event.triggerPublicListener("csscodechanged_boxshadow", boxShadow);
 };

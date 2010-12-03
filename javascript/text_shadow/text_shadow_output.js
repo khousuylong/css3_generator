@@ -7,29 +7,22 @@ CSS3.outputBox = function(){
 	this._stopColor	 = "F0FFFD";
 	this._stopPosition = 100;
 	
-	this._vbox = new YK.VBoxFactory(false);
-		this._domObj = new YK.Dom(100, 150);
-			this._divTextShadow = YK.domBuilder.create({'tag': 'div', "text": "Text Shadow"});
-			var divTextShadowStyle = this._divTextShadow.style;
-			divTextShadowStyle.fontFamily = "Times New Roman, Times, serif";
-			divTextShadowStyle.display = "table-cell";
-			divTextShadowStyle.textAlign = "center";
-			divTextShadowStyle.fontSize = "40px";
-			divTextShadowStyle.fontWeight = "bold";
-			divTextShadowStyle.verticalAlign = "middle";
-			divTextShadowStyle.width = "100px";
-			divTextShadowStyle.height = "200px";
-			divTextShadowStyle.WebkitBorderRadius = "6px";
-			divTextShadowStyle.MozBorderRadius = "6px";
-			divTextShadowStyle.BorderRadius = "6px";
-			divTextShadowStyle.border = "1px solid #D5D5D5";
-		this._domObj.appendChild(this._divTextShadow);
-	this._vbox.appendChild(this._domObj, {"expand": false, "fill": false});
+	this._domWidget = new YK.Dom(100, 150);
+		this._divTextShadow = YK.domBuilder.create({'tag': 'div', "text": "Text Shadow"});
+		var divTextShadowStyle = this._divTextShadow.style;
+		divTextShadowStyle.fontFamily = "Times New Roman, Times, serif";
+		divTextShadowStyle.fontSize = "40px";
+		divTextShadowStyle.fontWeight = "bold";
+		divTextShadowStyle.width = "400px";
+		divTextShadowStyle.height = "100px";
+ 		divTextShadowStyle.textAlign = "center";
+	this._domWidget.appendChild(this._divTextShadow);
+
 	var self = this;
 	YK.Event.addPublicListener(this, "textshadowchanged", function(gradientObj){
 		self._changeGradient(gradientObj);
 	});
-	return this._vbox;
+	return this._domWidget;
 };
 
 CSS3.outputBox.prototype._changeGradient = function(gradientObj){
