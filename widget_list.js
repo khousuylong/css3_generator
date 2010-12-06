@@ -13,3 +13,10 @@ var model = new YK.TreeStore();
 		model.append(BorderRadiuEqual, {"display": "Different Radius ", "generator":"javascript/border_radius/border_radius_dif_generator.js", "output": "javascript/border_radius/border_radius_output.js", "cssCode": "javascript/border_radius/border_dif_radius_css.js"});
 
 	model.append(null, {"display": "Multiple Columns", "generator":"javascript/multiple_columns/multiple_columns_generator.js", "output": "javascript/multiple_columns/multiple_columns_preview.js", "cssCode": "javascript/multiple_columns/multiple_columns_css.js"});
+
+	model.append(null, {
+		"display": "Box Sizing", 
+		"generator":"javascript/box_sizing/box_sizing_generator.js", 
+		"output": "javascript/box_sizing/box_sizing_preview.js", 
+		"cssCode": "javascript/box_sizing/box_sizing_code.js"
+	});
