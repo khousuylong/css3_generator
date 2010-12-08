@@ -20,3 +20,10 @@ var model = new YK.TreeStore();
 		"output": "javascript/box_sizing/box_sizing_preview.js", 
 		"cssCode": "javascript/box_sizing/box_sizing_code.js"
 	});
+
+	model.append(null, {
+		"display": "Outline", 
+		"generator":"javascript/outline/outline_generator.js", 
+		"output": "javascript/outline/outline_preview.js", 
+		"cssCode": "javascript/outline/outline_css.js"
+	});

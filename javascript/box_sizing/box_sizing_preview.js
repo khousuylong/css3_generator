@@ -46,7 +46,6 @@ CSS3.outputBox = function(){
 };
 
 CSS3.outputBox.prototype._changeBoxSizing = function(obj){
-	console.log(obj)
 	this._boxDiv1.style.MozBoxSizing = obj['boxOption'];
 	this._boxDiv1.style.WebkitBoxSizing = obj['boxOption'];
 	this._boxDiv1.style.boxSizing = obj['boxOption'];
@@ -55,5 +54,5 @@ CSS3.outputBox.prototype._changeBoxSizing = function(obj){
 	this._boxDiv2.style.WebkitBoxSizing = obj['boxOption'];
 	this._boxDiv2.style.boxSizing = obj['boxOption'];
 
-//	YK.Event.triggerPublicListener("csscodechanged_boxshadow", boxShadow);
+	YK.Event.triggerPublicListener("csscodechanged_box_sizing", obj['boxOption']);
 };
