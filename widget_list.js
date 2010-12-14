@@ -27,3 +27,10 @@ var model = new YK.TreeStore();
 		"output": "javascript/outline/outline_preview.js", 
 		"cssCode": "javascript/outline/outline_css.js"
 	});
+
+	model.append(null, {
+		"display": "Transitions", 
+		"generator":"javascript/transition/transition_generator.js", 
+		"output": "javascript/transition/transition_preview.js", 
+		"cssCode": "javascript/transition/transition_css.js"
+	});
