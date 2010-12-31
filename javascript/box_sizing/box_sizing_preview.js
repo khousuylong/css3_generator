@@ -1,6 +1,5 @@
 CSS3.outputBox = function(){
-	var scroller = new YK.VScroller();
-	scroller.resetMinSize(300, 300);
+	this._container = new YK.Container();
 		this._domWidget = new YK.Dom(280, 280);
 			var boxContainer = YK.domBuilder.create({'tag': 'div'});
 			var boxContainerStyle = boxContainer.style;
@@ -23,7 +22,7 @@ CSS3.outputBox = function(){
 				boxDiv1Style.MozBoxSizing = "border-box";
 				boxDiv1Style.WebkitBoxSizing = "border-box"
 				boxDiv1Style.boxSizing = "border-box";
-			
+
 				this._boxDiv2 = YK.domBuilder.create({'append': boxContainer,'tag': 'div', 'class': 'box_sizing_div2'});
 				this._boxDiv2.innerHTML = "Box 2";
 				var boxDiv2Style = this._boxDiv2.style;
@@ -37,12 +36,12 @@ CSS3.outputBox = function(){
 				boxDiv2Style.boxSizing = "border-box";
 
 		this._domWidget.appendChild(boxContainer);
-	scroller.appendChild(this._domWidget);
+	this._container.appendChild(this._domWidget, {"expand": true, "fill": false}, {"expand": true, "fill": false});
 	var self = this;
 	YK.Event.addPublicListener(this, "box_sizing_changed", function(obj){
 		self._changeBoxSizing(obj);
 	});
-	return scroller;
+	return this._container;
 };
 
 CSS3.outputBox.prototype._changeBoxSizing = function(obj){

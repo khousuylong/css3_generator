@@ -1,42 +1,42 @@
 CSS3.outputBox = function(){
-	
-	this._domWidget = new YK.Dom(400, 200);
-	this._domWidgetNodeStyle = this._domWidget.getNode().style;
-	this._domWidgetNodeStyle.WebkitBorderRadius = "6px";
-	this._domWidgetNodeStyle.MozBorderRadius = "6px";
-	this._domWidgetNodeStyle.BorderRadius = "6px";
-	this._domWidgetNodeStyle.border = "1px solid #D5D5D5";
-		this._textDom = YK.domBuilder.create({'tag': 'p'});
-		this._textDom.innerHTML = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit." +
-								"Sed metus nibh, sodales a, porta at," +
-								"vulputate eget, dui. Pellentesque ut nisl." +
-								"Maecenas tortor turpis, interdum non," +
-								"sodales non, iaculis ac, lacus." +
-								"auctor, tortor quis iaculis malesuada," +
-								"libero lectus bibendum purus, sit amet" +
-								"tincidunt quam turpis vel lacus." +
-								"In pellentesque nisl non sem. Suspendisse" +
-								"nunc sem, pretium eget, cursus a," +
-								"fringilla vel, urna." + 
-								"Lorem ipsum dolor sit amet, consectetuer adipiscing elit." +
-								"Sed metus nibh, sodales a, porta at," +
-								"vulputate eget, dui. Pellentesque ut nisl." +
-								"Maecenas tortor turpis, interdum non," +
-								"sodales non, iaculis ac, lacus." +
-								"auctor, tortor quis iaculis malesuada," +
-								"libero lectus bibendum purus, sit amet" +
-								"tincidunt quam turpis vel lacus.";
+	this._container = new YK.Container();	
+		this._domWidget = new YK.Dom(400, 200);
+		this._domWidgetNodeStyle = this._domWidget.getNode().style;
+		this._domWidgetNodeStyle.WebkitBorderRadius = "6px";
+		this._domWidgetNodeStyle.MozBorderRadius = "6px";
+		this._domWidgetNodeStyle.BorderRadius = "6px";
+		this._domWidgetNodeStyle.border = "1px solid #D5D5D5";
+			this._textDom = YK.domBuilder.create({'tag': 'p'});
+			this._textDom.innerHTML = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit." +
+									"Sed metus nibh, sodales a, porta at," +
+									"vulputate eget, dui. Pellentesque ut nisl." +
+									"Maecenas tortor turpis, interdum non," +
+									"sodales non, iaculis ac, lacus." +
+									"auctor, tortor quis iaculis malesuada," +
+									"libero lectus bibendum purus, sit amet" +
+									"tincidunt quam turpis vel lacus." +
+									"In pellentesque nisl non sem. Suspendisse" +
+									"nunc sem, pretium eget, cursus a," +
+									"fringilla vel, urna." + 
+									"Lorem ipsum dolor sit amet, consectetuer adipiscing elit." +
+									"Sed metus nibh, sodales a, porta at," +
+									"vulputate eget, dui. Pellentesque ut nisl." +
+									"Maecenas tortor turpis, interdum non," +
+									"sodales non, iaculis ac, lacus." +
+									"auctor, tortor quis iaculis malesuada," +
+									"libero lectus bibendum purus, sit amet" +
+									"tincidunt quam turpis vel lacus.";
 
-		this._textDom.style.height = "200px";
-		this._textDom.style.width  = "400px"
+			this._textDom.style.height = "200px";
+			this._textDom.style.width  = "400px"
 
-	this._domWidget.appendChild(this._textDom, {"expand": true, "fill": true}, {"expand": true, "fill": true});
-	
+		this._domWidget.appendChild(this._textDom, {"expand": true, "fill": true}, {"expand": true, "fill": true});
+	this._container.appendChild(this._domWidget, {"expand": true, "fill": false}, {"expand": true, "fill": false});
 	var self = this;
 	YK.Event.addPublicListener(this, "columns_changed", function(Obj){
 		self._changePreview(Obj);
 	});
-	return this._domWidget;
+	return this._container;
 };
 
 CSS3.outputBox.prototype._changePreview = function(obj){

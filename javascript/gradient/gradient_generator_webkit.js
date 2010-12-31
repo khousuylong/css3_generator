@@ -2,139 +2,150 @@ CSS3.generatorBox = function(){
 	this._linearGradient = {"stopProperties": []};
 	var self = this;
 	var mainVBox = new YK.VBoxFactory(false, 5);
-	var startFrame = new YK.Frame("START");
-	startFrame.setLabelAlign(0.02, 0.02);
 
-		var startTableWidget = new YK.TableFactory(5,4,false, false, 6);
+		//Start Frame
+		var startFrame = new YK.Frame("START");
+		startFrame.setLabelAlign(0.02, 0.02);
+
+			//Start Color
+			var startTableWidget = new YK.TableFactory(5,4,false, false, 6);
 			var startColorLabel = new YK.Label("Start Color:");
 			startColorLabel.resetMinWidth(120);
 			startColorLabel.setJustify(YK.JUSTIFY_RIGHT);
 
-		startTableWidget.attach(startColorLabel, 0, 1, 0, 1, {align: YK.JUSTIFY_LEFT, fill: true}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
-			var startColorEntry = new YK.Entry();
-			startColorEntry.resetMinWidth(70);
-			startColorEntry.connect("focused", function(value){
-				self._linearGradient["startColor"] = value;	
-				YK.Event.triggerPublicListener("gradientchanged", self._linearGradient);
-			});
-			var inputDomStartColorEntry = startColorEntry.getNode().firstChild.firstChild;
-			var myPicker = new jscolor.color(inputDomStartColorEntry, {});
-			myPicker.fromString('C9C9C9');
-			this._linearGradient["startColor"] = "C9C9C9"
+			startTableWidget.attach(startColorLabel, 0, 1, 0, 1, {align: YK.JUSTIFY_LEFT, fill: true}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+				var startColorEntry = new YK.Entry();
+				startColorEntry.resetMinWidth(70);
+				startColorEntry.connect("focused", function(value){
+					self._linearGradient["startColor"] = value;	
+					YK.Event.triggerPublicListener("gradientchanged", self._linearGradient);
+				});
+				var inputDomStartColorEntry = startColorEntry.getNode().firstChild.firstChild;
+				var myPicker = new jscolor.color(inputDomStartColorEntry, {});
+				myPicker.fromString('ADAAAA');
+				this._linearGradient["startColor"] = "ADAAAA"
 
-		startTableWidget.attach(startColorEntry, 1, 2, 0, 1, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+			startTableWidget.attach(startColorEntry, 1, 2, 0, 1, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
 
-			var hPositionLabel = new YK.Label("Horizontal Position:");
-			hPositionLabel.setJustify(YK.JUSTIFY_RIGHT);
-		startTableWidget.attach(hPositionLabel, 0, 1, 2, 3, {align: YK.JUSTIFY_LEFT, fill: true}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
-			var hPositionScale = new YK.Scale(0, 100);
-			hPositionScale.resetMinWidth(200);
-			hPositionScale.connect("changed", function(currentScale){
-				self._linearGradient["hPositionStart"] = currentScale;
-				YK.Event.triggerPublicListener("gradientchanged", self._linearGradient);
-				hPositionEntry.setText( Math.floor( currentScale ) );
-			});
-			hPositionScale.setScale(85);
-			this._linearGradient["hPositionStart"] = 85;
+				//Horizontal Position		
+				var hPositionLabel = new YK.Label("Horizontal Position:");
+				hPositionLabel.setJustify(YK.JUSTIFY_RIGHT);
+			startTableWidget.attach(hPositionLabel, 0, 1, 2, 3, {align: YK.JUSTIFY_LEFT, fill: true}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+				var hPositionScale = new YK.Scale(0, 100);
+				hPositionScale.resetMinWidth(200);
+				hPositionScale.connect("changed", function(currentScale){
+					self._linearGradient["hPositionStart"] = currentScale;
+					YK.Event.triggerPublicListener("gradientchanged", self._linearGradient);
+					hPositionEntry.setText( Math.floor( currentScale ) );
+				});
+				hPositionScale.setScale(19);
+				this._linearGradient["hPositionStart"] = 19;
 
-		startTableWidget.attach(hPositionScale, 1, 2, 2, 3, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
-			var hPositionEntry = new YK.Entry();
-			hPositionEntry.setText(85);
-			hPositionEntry.resetMinWidth(40);
-		startTableWidget.attach(hPositionEntry, 2, 3, 2, 3, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
-		startTableWidget.attach(new YK.Label("%"), 3, 4, 2, 3, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+			startTableWidget.attach(hPositionScale, 1, 2, 2, 3, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
 
-			var vPositionLabel = new YK.Label("Vertical Position:");
-			vPositionLabel.setJustify(YK.JUSTIFY_RIGHT);
-		startTableWidget.attach(vPositionLabel, 0, 1, 3, 4, {align: YK.JUSTIFY_LEFT, fill: true}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+				var hPositionEntry = new YK.Entry();
+				hPositionEntry.setText(19);
+				hPositionEntry.resetMinWidth(40);
+			startTableWidget.attach(hPositionEntry, 2, 3, 2, 3, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+			startTableWidget.attach(new YK.Label("%"), 3, 4, 2, 3, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+			
+				//Vertical Position
+				var vPositionLabel = new YK.Label("Vertical Position:");
+				vPositionLabel.setJustify(YK.JUSTIFY_RIGHT);
+			startTableWidget.attach(vPositionLabel, 0, 1, 3, 4, {align: YK.JUSTIFY_LEFT, fill: true}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
 
-			var vPositionScale = new YK.Scale(0, 100);
-			vPositionScale.resetMinWidth(200);
-			vPositionScale.connect("changed", function(currentScale){
-				self._linearGradient["vPositionStart"] = currentScale;
-				YK.Event.triggerPublicListener("gradientchanged", self._linearGradient);
-				vPositionEntry.setText( Math.floor(currentScale) );
-			});
-			vPositionScale.setScale(19);
-			this._linearGradient["vPositionStart"] = 19;
+				var vPositionScale = new YK.Scale(0, 100);
+				vPositionScale.resetMinWidth(200);
+				vPositionScale.connect("changed", function(currentScale){
+					self._linearGradient["vPositionStart"] = currentScale;
+					YK.Event.triggerPublicListener("gradientchanged", self._linearGradient);
+					vPositionEntry.setText( Math.floor(currentScale) );
+				});
+				vPositionScale.setScale(84);
+				this._linearGradient["vPositionStart"] = 84;
 
-		startTableWidget.attach(vPositionScale, 1, 2, 3, 4, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
-			var vPositionEntry = new YK.Entry();
-			vPositionEntry.setText(19);
-			vPositionEntry.resetMinWidth(40);
-		startTableWidget.attach(vPositionEntry, 2, 3, 3, 4, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
-		startTableWidget.attach(new YK.Label("%"), 3, 4, 3, 4, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+			startTableWidget.attach(vPositionScale, 1, 2, 3, 4, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+				var vPositionEntry = new YK.Entry();
+				vPositionEntry.setText(84);
+				vPositionEntry.resetMinWidth(40);
+			startTableWidget.attach(vPositionEntry, 2, 3, 3, 4, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+			startTableWidget.attach(new YK.Label("%"), 3, 4, 3, 4, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
 
 		startFrame.appendChild(startTableWidget);
 
-	var endFrame = new YK.Frame("END");
-	endFrame.lockSize();
-	endFrame.setLabelAlign(0.02, 0.02);
-		var endTableWidget = new YK.TableFactory(5,4,false, false, 6);
-			var endColorLabel = new YK.Label("End Color:");
-			endColorLabel.setJustify(YK.JUSTIFY_RIGHT);
-		endTableWidget.attach(endColorLabel, 0, 1, 1, 2, {align: YK.JUSTIFY_LEFT, fill: true}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
-			var endColorEntry = new YK.Entry();
-			endColorEntry.resetMinWidth(70);
-			endColorEntry.connect("focused", function(colorCode){
-				self._linearGradient["endColor"] = colorCode;
-				YK.Event.triggerPublicListener("gradientchanged", self._linearGradient);
-			});
+		//End frame
+		var endFrame = new YK.Frame("END");
+		endFrame.lockSize();
+		endFrame.setLabelAlign(0.02, 0.02);
+			var endTableWidget = new YK.TableFactory(5,4,false, false, 6);
 
-			var inputDomEndColorEntry = endColorEntry.getNode().firstChild.firstChild;
-			var myPicker = new jscolor.color(inputDomEndColorEntry, {});
-			myPicker.fromString('7D7D7D');
-			this._linearGradient["endColor"] = "7D7D7D";
+				//End color
+				var endColorLabel = new YK.Label("End Color:");
+				endColorLabel.setJustify(YK.JUSTIFY_RIGHT);
+			endTableWidget.attach(endColorLabel, 0, 1, 1, 2, {align: YK.JUSTIFY_LEFT, fill: true}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+				var endColorEntry = new YK.Entry();
+				endColorEntry.resetMinWidth(70);
+				endColorEntry.connect("focused", function(colorCode){
+					self._linearGradient["endColor"] = colorCode;
+					YK.Event.triggerPublicListener("gradientchanged", self._linearGradient);
+				});
 
-		endTableWidget.attach(endColorEntry, 1, 2, 1, 2, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+				var inputDomEndColorEntry = endColorEntry.getNode().firstChild.firstChild;
+				var myPicker = new jscolor.color(inputDomEndColorEntry, {});
+				myPicker.fromString('7D7D7D');
+				this._linearGradient["endColor"] = "7D7D7D";
+
+			endTableWidget.attach(endColorEntry, 1, 2, 1, 2, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
 			
-			var hPositionLabelEnd = new YK.Label("Horizontal Position:");
-			hPositionLabelEnd.setJustify(YK.JUSTIFY_RIGHT);
-		endTableWidget.attach(hPositionLabelEnd, 0, 1, 2, 3, {align: YK.JUSTIFY_LEFT, fill: true}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+				//Horizontal
+				var hPositionLabelEnd = new YK.Label("Horizontal Position:");
+				hPositionLabelEnd.setJustify(YK.JUSTIFY_RIGHT);
+			endTableWidget.attach(hPositionLabelEnd, 0, 1, 2, 3, {align: YK.JUSTIFY_LEFT, fill: true}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
 			
-			var hPositionScaleEnd = new YK.Scale(0, 100);
-			hPositionScaleEnd.resetMinWidth(200);
-			hPositionScaleEnd.connect("changed", function(currentScale){
-				self._linearGradient["hPositionEnd"] = currentScale;
-				YK.Event.triggerPublicListener("gradientchanged", self._linearGradient);
-				hPositionEntryEnd.setText( Math.floor( currentScale ) );
-			});
-			hPositionScaleEnd.setScale(50);
-			this._linearGradient["hPositionEnd"] = 50;
+				var hPositionScaleEnd = new YK.Scale(0, 100);
+				hPositionScaleEnd.resetMinWidth(200);
+				hPositionScaleEnd.connect("changed", function(currentScale){
+					self._linearGradient["hPositionEnd"] = currentScale;
+					YK.Event.triggerPublicListener("gradientchanged", self._linearGradient);
+					hPositionEntryEnd.setText( Math.floor( currentScale ) );
+				});
+				hPositionScaleEnd.setScale(19);
+				this._linearGradient["hPositionEnd"] = 19;
 
-		endTableWidget.attach(hPositionScaleEnd, 1, 2, 2, 3, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
-			var hPositionEntryEnd = new YK.Entry();
-			hPositionEntryEnd.setText(50);
-			hPositionEntryEnd.resetMinWidth(40);
-		endTableWidget.attach(hPositionEntryEnd, 2, 3, 2, 3, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
-		endTableWidget.attach(new YK.Label("%"), 3, 4, 2, 3, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+			endTableWidget.attach(hPositionScaleEnd, 1, 2, 2, 3, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+				var hPositionEntryEnd = new YK.Entry();
+				hPositionEntryEnd.setText(19);
+				hPositionEntryEnd.resetMinWidth(40);
+			endTableWidget.attach(hPositionEntryEnd, 2, 3, 2, 3, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+			endTableWidget.attach(new YK.Label("%"), 3, 4, 2, 3, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
 
-			var vPositionLabelEnd = new YK.Label("Vertical Position:");
-			vPositionLabelEnd.setJustify(YK.JUSTIFY_RIGHT);
-		endTableWidget.attach(vPositionLabelEnd, 0, 1, 3, 4, {align: YK.JUSTIFY_LEFT, fill: true}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+				//Vertical position
+				var vPositionLabelEnd = new YK.Label("Vertical Position:");
+				vPositionLabelEnd.setJustify(YK.JUSTIFY_RIGHT);
+			endTableWidget.attach(vPositionLabelEnd, 0, 1, 3, 4, {align: YK.JUSTIFY_LEFT, fill: true}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
 
-			var vPositionScaleEnd = new YK.Scale(0, 100);
-			vPositionScaleEnd.resetMinWidth(200);
-			vPositionScaleEnd.connect("changed", function(currentScale){
-				self._linearGradient["vPositionEnd"] = currentScale;
-				YK.Event.triggerPublicListener("gradientchanged", self._linearGradient);
-				vPositionEntry.setText( Math.floor(currentScale) );
-			});
-			vPositionScaleEnd.setScale(100);
-			this._linearGradient["vPositionEnd"] = 100;
+				var vPositionScaleEnd = new YK.Scale(0, 100);
+				vPositionScaleEnd.resetMinWidth(200);
+				vPositionScaleEnd.connect("changed", function(currentScale){
+					self._linearGradient["vPositionEnd"] = currentScale;
+					YK.Event.triggerPublicListener("gradientchanged", self._linearGradient);
+					vPositionEndEntry.setText( Math.floor(currentScale) );
+				});
+				vPositionScaleEnd.setScale(0);
+				this._linearGradient["vPositionEnd"] = 0;
 
-		endTableWidget.attach(vPositionScaleEnd, 1, 2, 3, 4, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
-			var vPositionEntry = new YK.Entry();
-			vPositionEntry.setText(19);
-			vPositionEntry.resetMinWidth(40);
-		endTableWidget.attach(vPositionEntry, 2, 3, 3, 4, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
-		endTableWidget.attach(new YK.Label("%"), 3, 4, 3, 4, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+			endTableWidget.attach(vPositionScaleEnd, 1, 2, 3, 4, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+				var vPositionEndEntry = new YK.Entry();
+				vPositionEndEntry.setText(0);
+				vPositionEndEntry.resetMinWidth(40);
+			endTableWidget.attach(vPositionEndEntry, 2, 3, 3, 4, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+			endTableWidget.attach(new YK.Label("%"), 3, 4, 3, 4, {align: YK.JUSTIFY_LEFT, fill: false}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
 
-	endFrame.appendChild(endTableWidget)
+		endFrame.appendChild(endTableWidget)
 
-	this._stopFrame = new YK.Frame("STOP");
-	this._stopFrame.lockWidth();
-	this._stopFrame.setLabelAlign(0.02, 0.02);
+		this._stopFrame = new YK.Frame("STOP");
+		this._stopFrame.lockWidth();
+		this._stopFrame.setLabelAlign(0.02, 0.02);
 
 		this._stopVbox = new YK.VBoxFactory(false, 10);
 
@@ -167,8 +178,8 @@ CSS3.generatorBox.prototype._createStopElement = function(){
 			stopColorEntry.resetMinWidth(70);
 			var inputDomStopColorEntry = stopColorEntry.getNode().firstChild.firstChild;
 			var myPicker = new jscolor.color(inputDomStopColorEntry, {});
-			myPicker.fromString("A1A1A1");
-			stopObj["stopColor"] = "A1A1A1"
+			myPicker.fromString("696969");
+			stopObj["stopColor"] = "696969";
 			stopColorEntry.connect("focused", function(value){
 				stopObj["stopColor"] = value;
 				YK.Event.triggerPublicListener("gradientchanged", self._linearGradient);
@@ -184,7 +195,7 @@ CSS3.generatorBox.prototype._createStopElement = function(){
 		hbox.appendChild(stopPositionLabel, {"expand": false, "fill": false});
 
 			var positionScale = new YK.Scale(0, 1);
-			stopObj["stopScale"] = 0;
+			stopObj["stopScale"] = 0.5;
 			positionScale.resetMinWidth(200);
 			positionScale.connect("changed", function(currentScale){
 				stopObj["stopScale"] = currentScale;
