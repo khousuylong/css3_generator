@@ -21,15 +21,15 @@ CSS3.cssCode = function(){
 		cssCodeLabelBottomRight.setSelectable(true);
 
 		YK.Event.addPublicListener(this, "csscodechanged_border_radius", function(cssCode){
-			cssCodeLabelTopLeftMozilla.setText("-moz-border-radius-topleft: " + cssCode['borderRadiusTopLeft'] + "px");
-			cssCodeLabelTopRightMozilla.setText("-moz-border-radius-topright: " + cssCode['borderRadiusTopRight'] + "px");
-			cssCodeLabelBottomLeftMozilla.setText("-moz-border-radius-bottomleft: " + cssCode['borderRadiusBottomLeft'] + "px");
-			cssCodeLabelBottomRightMozilla.setText("-moz-border-radius-bottomright: " + cssCode['borderRadiusBottomRight'] + "px");
+			cssCodeLabelTopLeftMozilla.setText("-moz-border-radius-topleft: " + cssCode['borderRadiusTopLeft'] + "px;");
+			cssCodeLabelTopRightMozilla.setText("-moz-border-radius-topright: " + cssCode['borderRadiusTopRight'] + "px;");
+			cssCodeLabelBottomLeftMozilla.setText("-moz-border-radius-bottomleft: " + cssCode['borderRadiusBottomLeft'] + "px;");
+			cssCodeLabelBottomRightMozilla.setText("-moz-border-radius-bottomright: " + cssCode['borderRadiusBottomRight'] + "px;");
 
-			cssCodeLabelTopLeft.setText("border-top-left-radius: " + cssCode['borderRadiusTopLeft'] + "px");
-			cssCodeLabelTopRight.setText("border-top-right-radius: " + cssCode['borderRadiusTopRight'] + "px");
-			cssCodeLabelBottomLeft.setText("border-bottom-right-radius: " + cssCode['borderRadiusBottomLeft'] + "px");
-			cssCodeLabelBottomRight.setText("border-bottom-left-radius: " + cssCode['borderRadiusBottomRight'] + "px");
+			cssCodeLabelTopLeft.setText("border-top-left-radius: " + cssCode['borderRadiusTopLeft'] + "px;");
+			cssCodeLabelTopRight.setText("border-top-right-radius: " + cssCode['borderRadiusTopRight'] + "px;");
+			cssCodeLabelBottomLeft.setText("border-bottom-right-radius: " + cssCode['borderRadiusBottomLeft'] + "px;");
+			cssCodeLabelBottomRight.setText("border-bottom-left-radius: " + cssCode['borderRadiusBottomRight'] + "px;");
 			container.refresh();
 		});
 

@@ -28,19 +28,18 @@ var model = new YK.TreeStore();
 		"cssCode": "javascript/text_shadow/text_shadow_css.js"
 	});
 
-	var BorderRadiuEqual = model.append(null, {"display": "Border Radius"});
-		model.append(BorderRadiuEqual, {
-			"display": "Equal Radius", 
-			"generator":"javascript/border_radius/border_radius_equal_generator.js", 
-			"output": "javascript/border_radius/border_radius_preview.js", 
-			"cssCode": "javascript/border_radius/border_equal_radius_css.js"
-		});
-		model.append(BorderRadiuEqual, {
-			"display": "Different Radius ", 
-			"generator":"javascript/border_radius/border_radius_dif_generator.js", 
-			"output": "javascript/border_radius/border_radius_preview.js", 
-			"cssCode": "javascript/border_radius/border_dif_radius_css.js"
-		});
+	model.append(null, {
+		"display": "Equal Border Radius", 
+		"generator":"javascript/border_radius/border_radius_equal_generator.js", 
+		"output": "javascript/border_radius/border_radius_preview.js", 
+		"cssCode": "javascript/border_radius/border_equal_radius_css.js"
+	});
+	model.append(null, {
+		"display": "Different Border Radius ", 
+		"generator":"javascript/border_radius/border_radius_dif_generator.js", 
+		"output": "javascript/border_radius/border_radius_preview.js", 
+		"cssCode": "javascript/border_radius/border_dif_radius_css.js"
+	});
 
 	model.append(null, {
 		"display": "Multiple Columns", 

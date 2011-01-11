@@ -5,67 +5,66 @@
 	<title>Another CSS3 generator</title>
 <!--		<link type="text/css" rel="stylesheet" href="sh_hili/styles/sh_berries-dark.css">-->
 		<link rel="stylesheet" type="text/css" href="lib/yoolkui/css/yoolk-ui_min_0.19.48.css" />
-		<script type="text/javascript" src="lib/yoolkui/src/yoolk-ui_min_0.19.48.js"></script>
+		<script type="text/javascript" src="lib/yoolkui/src/yoolk-ui_min_0.19.52.js"></script>
 		<script type="text/javascript" src="lib/jscolor/jscolor.js"></script>
 
 		<script type="text/javascript" src="javascript/css.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
-		<style>
 
-			.yk_window_header_base{
-				background-image: -moz-linear-gradient(19% 100% 90deg,#C9C9C9, #7D7D7D, #A1A1A1 100%);
-				background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#C9C9C9), color-stop(0.6, #A1A1A1), to(rgb(132, 132, 132)));
-			}
-		</style>
-	   
 		<script type="text/javascript" src="widget_list.js"></script>
 		<script>
 			window.onload = function(){
 
+				 //Main HPand
 				 var hPaned = new YK.HPaned();
-
-					listPanel = new YK.Panel("CSS3 Features");
+					
+					//Widget list panel
+					featurePanel = new YK.Panel("CSS3 Features");
 						var scroller = new YK.VScroller();
 						 	var treeview = new YK.TreeView();
-							//setModel
 							treeview.setModel(model);
 						scroller.appendChild(treeview, true);
-					listPanel.appendChild(scroller);
-					listPanel.disableCloseButton(); 
+					featurePanel.appendChild(scroller);
+					featurePanel.disableCloseButton(); 
 
-				hPaned.pack1(listPanel, true, false);
-					var vBox = new YK.VBoxFactory(false, 5);
-						var hBox = new YK.HBoxFactory(false, 5);
-								var generatorPanel = new YK.Panel("GENERATOR");
+				hPaned.pack1(featurePanel);
+					
+					//Generator, Preview, Code VPaned
+					var vPaned = new YK.VPaned();
+						
+						//Generator, Preview HPaned
+						var hPaned1 = new YK.HPaned();
+							var generatorPanel = new YK.Panel("GENERATOR");
 								generatorPanel.disableCloseButton();
 									generatorScroller = new YK.VScroller();
 										generatorScroller.getNode().setAttribute("id", "show_content_area");
-									generatorScroller.appendChild(new YK.Label("generator"), true);
+									generatorScroller.appendChild(new YK.Label("GENERATOR"), true);
 
-								generatorPanel.appendChild(generatorScroller);
-
-						hBox.appendChild(generatorPanel, {"expand": true, "fill": true});
+							generatorPanel.appendChild(generatorScroller);
+						hPaned1.pack1( generatorPanel );
 							var outputPanel = new YK.Panel("PREVIEW");
 								outputPanel.disableCloseButton();
+									previewScroller = new YK.VScroller();
+										previewScroller.getNode().setAttribute("id", "show_content_area");
+									previewScroller.appendChild(new YK.Label("PREVIEW"), true);
+							outputPanel.appendChild(previewScroller);	
+						hPaned1.pack2( outputPanel )
+					vPaned.pack1( hPaned1 );
+							var codePanel = new YK.Panel("CSS3");
+							codePanel.resetMinHeight(200);
+							codePanel.disableCloseButton();
+								codeScroller = new YK.VScroller();
+									codeScroller.getNode().setAttribute("id", "show_content_area");
+								codeScroller.appendChild(new YK.Label("css3 for all supported browsers"), true);
 
-							outputPanel.appendChild(new YK.Label("output"));							
-						hBox.appendChild(outputPanel, {"expand": true, "fill": true});
-
-					vBox.appendChild(hBox, {"expand": true, "fill": true});
-						var codePanel = new YK.Panel("CSS3");
-						codePanel.resetMinHeight(200);
-						codePanel.disableCloseButton();
-							codeScroller = new YK.VScroller();
-								codeScroller.getNode().setAttribute("id", "show_content_area");
-							codeScroller.appendChild(new YK.Label("css3 for all supported browsers"), true);
-
-						codePanel.appendChild(codeScroller);
-					vBox.appendChild(codePanel, {"expand": false, "fill": false});
-				hPaned.pack2(vBox, true, false);
+							codePanel.appendChild(codeScroller);
+					vPaned.pack2(codePanel);
+					vPaned.setPosition(500);
+				hPaned.pack2(vPaned);
 				hPaned.setPosition(200);
 
-				hPaned.resizeWidth(window.innerWidth - 2);
-				hPaned.resizeHeight(window.innerHeight - 4);
+				hPaned.resizeWidth(window.innerWidth - 8);
+				hPaned.resizeHeight(window.innerHeight - 5);
 				hPaned.getNode().style.paddingLeft = "1px";
 
 				document.body.appendChild(hPaned.getNode());
@@ -79,7 +78,7 @@
 
 					var outputScript = createHeaderScriptTag(value["output"]);
 					outputScript.onload = function(){
-						outputPanel.appendChild(new CSS3.outputBox, {"expand": true, "fill": false}, {"expand": true, "fill": false});
+						previewScroller.appendChild(new CSS3.outputBox, true);
 					};
 
 					var generatorScript = createHeaderScriptTag(value["generator"]);
@@ -87,6 +86,50 @@
 						generatorScroller.appendChild(new CSS3.generatorBox(), true);
 					};
 				});
+
+				featurePanel.connect("minimized", function(){
+					hPaned.autoResize(featurePanel);
+				});
+				featurePanel.connect("restored", function(){
+					hPaned.restoreStatus(featurePanel);
+				});
+
+				codePanel.connect("minimized", function(){
+					vPaned.autoResize(codePanel);
+				});
+				codePanel.connect("restored", function(){
+					vPaned.restoreStatus(codePanel);
+				});
+
+				generatorPanel.connect("minimized", function(){
+					hPaned1.autoResize(generatorPanel);
+				});
+
+				generatorPanel.connect("restored", function(){
+					hPaned1.restoreStatus(generatorPanel);
+				});
+
+				outputPanel.connect("minimized", function(){
+					hPaned1.autoResize(outputPanel);
+				});
+
+				outputPanel.connect("restored", function(){
+					hPaned1.restoreStatus(outputPanel);
+				});
+
+				hPaned1.connect("childrendminimize", function(){
+					vPaned.autoResize(hPaned1);
+				});
+				hPaned1.connect("childrestore", function(){
+					vPaned.restoreStatus(hPaned1);
+				});
+
+<!--				vPaned.connect("childrendminimize", function(){-->
+<!--					hPaned.autoResize(vPaned);-->
+<!--				});-->
+<!--				vPaned.connect("childrestore", function(){-->
+<!--					hPaned.restoreStatus(vPaned);-->
+<!--				});-->
 		};
 
 		var createHeaderScriptTag = function(src){

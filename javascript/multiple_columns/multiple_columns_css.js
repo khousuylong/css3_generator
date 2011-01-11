@@ -1,7 +1,7 @@
 CSS3.cssCode = function(){
 	var container = new YK.Container();	
 		var vBox = new YK.VBoxFactory(false);
-			var mozColLabel = new YK.Label("CSS Code Here");
+			var mozColLabel = new YK.Label("");
 			mozColLabel.setSelectable(true);
 
 			var mozSpaceLabel = new YK.Label("");
@@ -28,14 +28,14 @@ CSS3.cssCode = function(){
 	container.appendChild(vBox, {"expand": true, "fill": false}, {"expand": true, "fill": false});
 	
 	YK.Event.addPublicListener(this, "csscodechanged_multiple_columns", function(cssCode){
-		mozColLabel.setText("-moz-column-count:" + cssCode['columns']);
-		mozSpaceLabel.setText("-moz-column-gap:" + cssCode['space'] + "px");
+		mozColLabel.setText("-moz-column-count: " + cssCode['columns'] + ";");
+		mozSpaceLabel.setText("-moz-column-gap: " + cssCode['space'] + "px;");
 
-		webkitColLabel.setText("-webkit-column-count:" + cssCode['columns']);
-		webkitSpaceLabel.setText("-webkit-column-gap:" + cssCode['space'] + "px");
+		webkitColLabel.setText("-webkit-column-count: " + cssCode['columns'] + ";");
+		webkitSpaceLabel.setText("-webkit-column-gap: " + cssCode['space'] + "px;");
 
-		colLabel.setText("column-count:" + cssCode['columns']);
-		spaceLabel.setText("column-gap:" + cssCode['space'] + "px");
+		colLabel.setText("column-count: " + cssCode['columns'] + ";");
+		spaceLabel.setText("column-gap: " + cssCode['space'] + "px;");
 		container.refresh();
 	});
 
