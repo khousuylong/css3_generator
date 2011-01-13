@@ -1,2 +1,27 @@
 @import url("box_sizing.css");
 @import url("override.css");
+
+.footer_container{
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-border-radius: 6px;
+	background-color: #717171;
+	border: 1px solid #D5D5D5;
+	padding-left: 4px;
+}
+
+.copyright_email_label{
+	height: 25px;
+	text-align: center;
+	color: #FFF;
+	font-weight: bold;
+}
+.git_label_dom{
+	display: inline;
+	padding-left: 4px;
+}
+a {
+    color: #DEDEDE;
+    text-decoration: none;
+	text-underline: none;
+}

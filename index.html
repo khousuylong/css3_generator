@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Another CSS3 generator</title>
+	<title>CSS3 Builder</title>
 <!--		<link type="text/css" rel="stylesheet" href="sh_hili/styles/sh_berries-dark.css">-->
 		<link rel="stylesheet" type="text/css" href="lib/yoolkui/css/yoolk-ui_min_0.19.48.css" />
-		<script type="text/javascript" src="lib/yoolkui/src/yoolk-ui_min_0.19.52.js"></script>
+		<script type="text/javascript" src="lib/yoolkui/src/yoolk-ui_min_0.24.65.js"></script>
 		<script type="text/javascript" src="lib/jscolor/jscolor.js"></script>
 
 		<script type="text/javascript" src="javascript/css.js"></script>
@@ -14,124 +14,166 @@
 		<script type="text/javascript" src="widget_list.js"></script>
 		<script>
 			window.onload = function(){
+				//Main Container
+				var vboxMain = new YK.VBoxFactory(false, 5);
 
-				 //Main HPand
-				 var hPaned = new YK.HPaned();
+					 //Main HPand
+					 var hPaned = new YK.HPaned();
 					
-					//Widget list panel
-					featurePanel = new YK.Panel("CSS3 Features");
-						var scroller = new YK.VScroller();
-						 	var treeview = new YK.TreeView();
-							treeview.setModel(model);
-						scroller.appendChild(treeview, true);
-					featurePanel.appendChild(scroller);
-					featurePanel.disableCloseButton(); 
+						//Widget list panel
+						featurePanel = new YK.Panel("CSS3 Features");
+							var scroller = new YK.VScroller();
+							 	var treeview = new YK.TreeView();
+								treeview.setModel(model);
+							scroller.appendChild(treeview, true);
+						featurePanel.appendChild(scroller);
+						featurePanel.disableCloseButton(); 
 
-				hPaned.pack1(featurePanel);
+					hPaned.pack1(featurePanel);
 					
-					//Generator, Preview, Code VPaned
-					var vPaned = new YK.VPaned();
+						//Generator, Preview, Code VPaned
+						var vPaned = new YK.VPaned();
 						
-						//Generator, Preview HPaned
-						var hPaned1 = new YK.HPaned();
-							var generatorPanel = new YK.Panel("GENERATOR");
-								generatorPanel.disableCloseButton();
-									generatorScroller = new YK.VScroller();
-										generatorScroller.getNode().setAttribute("id", "show_content_area");
-									generatorScroller.appendChild(new YK.Label("GENERATOR"), true);
+							//Generator, Preview HPaned
+							var hPaned1 = new YK.HPaned();
+								var generatorPanel = new YK.Panel("GENERATOR");
+									generatorPanel.disableCloseButton();
+										generatorScroller = new YK.VScroller();
+											generatorScroller.getNode().setAttribute("id", "show_content_area");
+										generatorScroller.appendChild(new YK.Label("GENERATOR"), true);
 
-							generatorPanel.appendChild(generatorScroller);
-						hPaned1.pack1( generatorPanel );
-							var outputPanel = new YK.Panel("PREVIEW");
-								outputPanel.disableCloseButton();
-									previewScroller = new YK.VScroller();
-										previewScroller.getNode().setAttribute("id", "show_content_area");
-									previewScroller.appendChild(new YK.Label("PREVIEW"), true);
-							outputPanel.appendChild(previewScroller);	
-						hPaned1.pack2( outputPanel )
-					vPaned.pack1( hPaned1 );
-							var codePanel = new YK.Panel("CSS3");
-							codePanel.resetMinHeight(200);
-							codePanel.disableCloseButton();
-								codeScroller = new YK.VScroller();
-									codeScroller.getNode().setAttribute("id", "show_content_area");
-								codeScroller.appendChild(new YK.Label("css3 for all supported browsers"), true);
+								generatorPanel.appendChild(generatorScroller);
+							hPaned1.pack1( generatorPanel );
+								var outputPanel = new YK.Panel("PREVIEW");
+									outputPanel.disableCloseButton();
+										previewScroller = new YK.VScroller();
+											previewScroller.getNode().setAttribute("id", "show_content_area");
+										previewScroller.appendChild(new YK.Label("PREVIEW"), true);
+								outputPanel.appendChild(previewScroller);	
+							hPaned1.pack2( outputPanel )
+						vPaned.pack1( hPaned1 );
+								var codePanel = new YK.Panel("CSS3");
+								codePanel.resetMinHeight(200);
+								codePanel.disableCloseButton();
+									codeScroller = new YK.VScroller();
+										codeScroller.getNode().setAttribute("id", "show_content_area");
+									codeScroller.appendChild(new YK.Label("css3 for all supported browsers"), true);
+								codePanel.appendChild(codeScroller);
+								//Overlay Copy right
+	<!--							codePanel.appendOverlay( new YK.Label("© 2011 YoolkUI – JavaScript UI Framework. All rights reserved. Powered by Yoolk."), {"bottom": 10, "right": 5});-->
+						vPaned.pack2(codePanel);
+						vPaned.setPosition(500);
+					hPaned.pack2(vPaned);
+					hPaned.setPosition(200);
 
-							codePanel.appendChild(codeScroller);
-					vPaned.pack2(codePanel);
-					vPaned.setPosition(500);
-				hPaned.pack2(vPaned);
-				hPaned.setPosition(200);
+					treeview.connect("nodeselected", function(value){
 
-				hPaned.resizeWidth(window.innerWidth - 8);
-				hPaned.resizeHeight(window.innerHeight - 5);
-				hPaned.getNode().style.paddingLeft = "1px";
+						var cssCodeScript = createHeaderScriptTag(value["cssCode"]);
+						cssCodeScript.onload = function(){
+							codeScroller.appendChild(new CSS3.cssCode(), true);
+						};
 
-				document.body.appendChild(hPaned.getNode());
+						var outputScript = createHeaderScriptTag(value["output"]);
+						outputScript.onload = function(){
+							previewScroller.appendChild(new CSS3.outputBox, true);
+						};
 
-				treeview.connect("nodeselected", function(value){
+						var generatorScript = createHeaderScriptTag(value["generator"]);
+						generatorScript.onload = function(){
+							generatorScroller.appendChild(new CSS3.generatorBox(), true);
+						};
+					});
 
-					var cssCodeScript = createHeaderScriptTag(value["cssCode"]);
-					cssCodeScript.onload = function(){
-						codeScroller.appendChild(new CSS3.cssCode(), true);
-					};
+					featurePanel.connect("minimized", function(){
+						hPaned.autoResize(featurePanel);
+					});
+					featurePanel.connect("restored", function(){
+						hPaned.restoreStatus(featurePanel);
+					});
 
-					var outputScript = createHeaderScriptTag(value["output"]);
-					outputScript.onload = function(){
-						previewScroller.appendChild(new CSS3.outputBox, true);
-					};
+					codePanel.connect("minimized", function(){
+						vPaned.autoResize(codePanel);
+					});
+					codePanel.connect("restored", function(){
+						vPaned.restoreStatus(codePanel);
+					});
 
-					var generatorScript = createHeaderScriptTag(value["generator"]);
-					generatorScript.onload = function(){
-						generatorScroller.appendChild(new CSS3.generatorBox(), true);
-					};
-				});
+					generatorPanel.connect("minimized", function(){
+						hPaned1.autoResize(generatorPanel);
+					});
 
-				featurePanel.connect("minimized", function(){
-					hPaned.autoResize(featurePanel);
-				});
-				featurePanel.connect("restored", function(){
-					hPaned.restoreStatus(featurePanel);
-				});
+					generatorPanel.connect("restored", function(){
+						hPaned1.restoreStatus(generatorPanel);
+					});
 
-				codePanel.connect("minimized", function(){
-					vPaned.autoResize(codePanel);
-				});
-				codePanel.connect("restored", function(){
-					vPaned.restoreStatus(codePanel);
-				});
+					outputPanel.connect("minimized", function(){
+						hPaned1.autoResize(outputPanel);
+					});
 
-				generatorPanel.connect("minimized", function(){
-					hPaned1.autoResize(generatorPanel);
-				});
+					outputPanel.connect("restored", function(){
+						hPaned1.restoreStatus(outputPanel);
+					});
 
-				generatorPanel.connect("restored", function(){
-					hPaned1.restoreStatus(generatorPanel);
-				});
+					hPaned1.connect("childrendminimize", function(){
+						vPaned.autoResize(hPaned1);
+					});
+					hPaned1.connect("childrestore", function(){
+						vPaned.restoreStatus(hPaned1);
+					});
 
-				outputPanel.connect("minimized", function(){
-					hPaned1.autoResize(outputPanel);
-				});
+	<!--				vPaned.connect("childrendminimize", function(){-->
+	<!--					hPaned.autoResize(vPaned);-->
+	<!--				});-->
+	<!--				vPaned.connect("childrestore", function(){-->
+	<!--					hPaned.restoreStatus(vPaned);-->
+	<!--				});-->
 
-				outputPanel.connect("restored", function(){
-					hPaned1.restoreStatus(outputPanel);
-				});
+				//Copy Right
+				var domCopyRight = new YK.Dom(300, 30);
+				domCopyRight.getNode().className += " ";
+				var domCopyRightStyle = domCopyRight.getNode().style;
+					var labelContainer = YK.domBuilder.create({'tag': 'div', "class": " "});
+						var copyRightLabel = YK.domBuilder.create({'append': labelContainer,'tag': 'div', "class": "copyright_label_dom"});
+						copyRightLabel.innerHTML = "© <a href = 'http://www.sharevisionteam.org'>ShareVisionTeam</a> @khou.suylong@gmail.com";
+						var gitLabel = YK.domBuilder.create({'append': copyRightLabel,'tag': 'div', "class": "git_label_dom"});
+						gitLabel.innerHTML = "@github";
+							
+					var footerContainer = new YK.Container();
+					footerContainer.getNode().className += " footer_container";
+					footerContainer.resetMinHeight(30);
+						var footerHbox = new YK.HBoxFactory(false);
 
-				hPaned1.connect("childrendminimize", function(){
-					vPaned.autoResize(hPaned1);
-				});
-				hPaned1.connect("childrestore", function(){
-					vPaned.restoreStatus(hPaned1);
-				});
+							var copyRiEmailLabel = new YK.Label("© <a href = 'http://www.sharevisionteam.org'>ShareVisionTeam 2011</a> @khou.suylong@gmail.com @github");
+							copyRiEmailLabel.resetMinWidth(396);
+							copyRiEmailLabel.getNode().className += " copyright_email_label";
+						
+							//copy to clip board
+							copyClipBoard = new YK.ClipBoard("https://github.com/khousuylong/css3_generator", YK.POSITION_TOP_CENTER);
+							copyClipBoard.setTooltip("Click to Copy URL");
 
-<!--				vPaned.connect("childrendminimize", function(){-->
-<!--					hPaned.autoResize(vPaned);-->
-<!--				});-->
-<!--				vPaned.connect("childrestore", function(){-->
-<!--					hPaned.restoreStatus(vPaned);-->
-<!--				});-->
-		};
+						footerHbox.appendChild(copyRiEmailLabel,{"expand": false, "fill": false});
+						footerHbox.appendChild(copyClipBoard,{"expand": false, "fill": false});
 
+					footerContainer.appendChild(footerHbox, {"expand": true, "fill": false}, {"expand": true, "fill": false});
+
+				domCopyRight.appendChild(labelContainer);
+				labelContainer.style.position = "relative";
+
+				vboxMain.appendChild(hPaned, {"expand": true, "fill": true});
+				vboxMain.appendChild(footerContainer, {"expand": false, "fill": true});
+				document.body.appendChild(vboxMain.getNode());
+
+				vboxMain.resizeWidth(window.innerWidth - 8);
+				vboxMain.resizeHeight(window.innerHeight - 5);
+				vboxMain.getNode().style.paddingLeft = "1px";
+			
+				window.onresize = function(){
+					vboxMain.resizeWidth(window.innerWidth - 8);
+					vboxMain.resizeHeight(window.innerHeight - 5);
+					vboxMain.getNode().style.paddingLeft = "1px";
+				};
+			};
+		
 		var createHeaderScriptTag = function(src){
 			var headID = document.getElementsByTagName("head")[0];
 				var newScript = document.createElement('script');
@@ -145,6 +187,19 @@
 			headID.appendChild(newScript);
 			return newScript;
 		};
+
+		</script>
+		<script type="text/javascript">
+
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-20719122-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
 
 		</script>
 </head>
