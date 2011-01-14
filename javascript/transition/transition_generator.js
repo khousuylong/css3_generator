@@ -19,7 +19,6 @@ CSS3.generatorBox = function(){
 				transitionModel.append(null, {"display": "Background", 'value': 'background'});
 				transitionModel.append(null, {"display": "Color", 'value': 'color'});
 				transitionModel.append(null, {"display": "Height", 'value': 'height'});
-				transitionModel.append(null, {"display": "Weight", 'value': 'weight'});
 				transitionModel.append(null, {"display": "Outline", 'value': 'outline'});
 
 				var transitionCombobox = new YK.ComboBox();

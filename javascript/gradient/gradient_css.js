@@ -5,7 +5,7 @@ CSS3.cssCode = function(){
 			cssCodeLabel.setSelectable(true);
 		vBox.appendChild(cssCodeLabel, {"expand": true, "fill": true});
 
-		YK.Event.addPublicListener(this, "csscodechanged", function(cssCode){
+		YK.Event.addPublicListener(this, "csscodechanged_gradient", function(cssCode){
 			cssCodeLabel.setText("background-image: " + cssCode + ";");
 			container.refresh();
 		});

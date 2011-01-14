@@ -22,6 +22,7 @@ CSS3.generatorBox = function(){
 				this._transformation["scale"] = 1;
 			transformationTableWidget.attach(scaleLabel, 0, 1, 0, 1, {align: YK.JUSTIFY_LEFT, fill: true}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
 			transformationTableWidget.attach(scaleEntry, 1, 2, 0, 1, {align: YK.JUSTIFY_LEFT, fill: true}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
+			transformationTableWidget.attach(new YK.Label("%"), 2, 3, 0, 1, {align: YK.JUSTIFY_LEFT, fill: true}, {align: YK.JUSTIFY_TOP, fill: true}, 1, 1);
 
 				//Rotate
 				var rotateLabel = new YK.Label("Rotate:");

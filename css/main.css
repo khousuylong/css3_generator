@@ -1,4 +1,5 @@
 @import url("box_sizing.css");
+@import url("transition.css");
 @import url("override.css");
 
 .footer_container{
@@ -19,6 +20,9 @@
 .git_label_dom{
 	display: inline;
 	padding-left: 4px;
+}
+.scroller_code_area{
+	background-color: #001B33;
 }
 a {
     color: #DEDEDE;

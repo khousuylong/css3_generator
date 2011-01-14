@@ -48,5 +48,5 @@ CSS3.outputBox.prototype._changeGradient = function(gradientObj){
 	backgroundImage = backgroundImage.substring(0, backgroundImage.length - 1) + ")";
 	
 	this._domWidgetNodeStyle.backgroundImage = backgroundImage ;
-	YK.Event.triggerPublicListener("csscodechanged", backgroundImage);
+	YK.Event.triggerPublicListener("csscodechanged_gradient", backgroundImage);
 };

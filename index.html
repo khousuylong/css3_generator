@@ -3,7 +3,6 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>CSS3 Builder</title>
-<!--		<link type="text/css" rel="stylesheet" href="sh_hili/styles/sh_berries-dark.css">-->
 		<link rel="stylesheet" type="text/css" href="lib/yoolkui/css/yoolk-ui_min_0.19.48.css" />
 		<script type="text/javascript" src="lib/yoolkui/src/yoolk-ui_min_0.24.65.js"></script>
 		<script type="text/javascript" src="lib/jscolor/jscolor.js"></script>
@@ -56,32 +55,35 @@
 								codePanel.resetMinHeight(200);
 								codePanel.disableCloseButton();
 									codeScroller = new YK.VScroller();
-										codeScroller.getNode().setAttribute("id", "show_content_area");
+									codeScroller.getNode().setAttribute("id", "show_content_area");
+
 									codeScroller.appendChild(new YK.Label("css3 for all supported browsers"), true);
 								codePanel.appendChild(codeScroller);
 								//Overlay Copy right
-	<!--							codePanel.appendOverlay( new YK.Label("© 2011 YoolkUI – JavaScript UI Framework. All rights reserved. Powered by Yoolk."), {"bottom": 10, "right": 5});-->
+<!--							codePanel.appendOverlay( new YK.Label("© 2011 YoolkUI – JavaScript UI Framework. All rights reserved. Powered by Yoolk."), {"bottom": 10, "right": 5});-->
 						vPaned.pack2(codePanel);
 						vPaned.setPosition(500);
 					hPaned.pack2(vPaned);
 					hPaned.setPosition(200);
 
 					treeview.connect("nodeselected", function(value){
-
+						//Load code script
 						var cssCodeScript = createHeaderScriptTag(value["cssCode"]);
 						cssCodeScript.onload = function(){
 							codeScroller.appendChild(new CSS3.cssCode(), true);
-						};
 
-						var outputScript = createHeaderScriptTag(value["output"]);
-						outputScript.onload = function(){
-							previewScroller.appendChild(new CSS3.outputBox, true);
-						};
+							//load preview script
+							var outputScript = createHeaderScriptTag(value["output"]);
+							outputScript.onload = function(){
+								previewScroller.appendChild(new CSS3.outputBox, true);
 
-						var generatorScript = createHeaderScriptTag(value["generator"]);
-						generatorScript.onload = function(){
-							generatorScroller.appendChild(new CSS3.generatorBox(), true);
-						};
+								//load generator script
+								var generatorScript = createHeaderScriptTag(value["generator"]);
+								generatorScript.onload = function(){
+									generatorScroller.appendChild(new CSS3.generatorBox(), true);
+								};
+							};
+						};						
 					});
 
 					featurePanel.connect("minimized", function(){

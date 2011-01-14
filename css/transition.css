@@ -1,0 +1,14 @@
+.transition_preview{
+	-webkit-border-radius : 6px;
+	-moz-border-radius : 6px;
+	-border-radius : 6px;
+	border : 2px solid #616161;
+	background : #D6D6D6;
+	color : #22C944;
+	outline : 3px dotted #5D4CC9
+	outlineOffset : 5px;
+	text-align: center;
+	padding-top: 35px;
+	font-size: 22px;
+	font-weight: bold;
+}
