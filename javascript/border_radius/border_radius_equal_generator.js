@@ -4,7 +4,7 @@ CSS3.generatorBox = function(){
 	var mainVBox = new YK.VBoxFactory(false, 5);
 	
 		//Different Size Rounded Corner
-		var equalSizeFrame = new YK.Frame("Equally Rounded Corner");
+		var equalSizeFrame = new YK.Frame("Rounded Corner");
 		equalSizeFrame.setLabelAlign(0.02, 0.02);
 
 			var equalSizeTableWidget = new YK.TableFactory(4,3,false, false, 6);
