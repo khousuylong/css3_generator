@@ -17,10 +17,13 @@ var model = new YK.TreeStore();
 			"display": "Border Color", 
 			"generator":"javascript/border_color/border_color_generator.js", 
 			"output": "javascript/border_color/border_color_preview.js", 
-			"cssCode": "javascript/border_radius/border_dif_radius_css.js"
+			"cssCode": "javascript/border_color/border_color_css.js"
 		});
 		model.append(border, {
-			"display": "Border Image ", 
+			"display": "Border Image", 
+			"generator":"javascript/border_image/border_image_generator.js", 
+			"output": "javascript/border_image/border_image_preview.js", 
+			"cssCode": "javascript/border_image/border_image_css.js"
 		});
 
 	//Background
@@ -66,6 +69,9 @@ var model = new YK.TreeStore();
 		});
 		model.append(textEffect, {
 			"display": "word-wrap", 
+			"generator":"javascript/word_wrap/word_wrap_generator.js", 
+			"output": "javascript/word_wrap/word_wrap_preview.js", 
+			"cssCode": "javascript/word_wrap/word_wrap_css.js"
 		});
 
 	//box 

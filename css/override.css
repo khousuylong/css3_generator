@@ -69,3 +69,13 @@
 .yk_button:active > .yk_button_gradient{
 	background-color: #C9C9C9;
 }
+
+/* container */
+.code_wrapper_dark{
+	-webkit-border-radius: 4px; /* Mozilla, Chrome */
+	-moz-border-radius: 4px; /* Mozilla  */
+	border-radius: 4px; /* Chrome, IE */
+	background: none repeat scroll 0 0 #333333;
+	font-family: Courier,MonoSpace;
+	color: white;
+}

@@ -4,6 +4,12 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>CSS3 Builder</title>
 		<link rel="stylesheet" type="text/css" href="lib/yoolkui/css/yoolk-ui_min_0.24.71.css" />
+
+		<!-- syntax hili-->
+		<script type="text/javascript" src="lib/sh_hili/sh_main.js"></script>
+		<script type="text/javascript" src="lib/sh_hili/sh_css.js"></script>
+		<link rel="stylesheet" type="text/css" href="lib/sh_hili/sh_vim-dark.css"/>
+
 		<script type="text/javascript" src="lib/yoolkui/src/yoolk-ui_min_0.24.71.js"></script>
 		<script type="text/javascript" src="lib/jscolor/jscolor.js"></script>
 
@@ -86,7 +92,7 @@
 							};
 						};						
 					});
-					treeview.setSelectedItemBy("display", "Border Color");
+					treeview.setSelectedItemBy("display", "word-wrap");
 
 					featurePanel.connect("minimized", function(){
 						hPaned.autoResize(featurePanel);

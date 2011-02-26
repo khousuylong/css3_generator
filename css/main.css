@@ -1,6 +1,7 @@
 @import url("box_sizing.css");
 @import url("transition.css");
 @import url("override.css");
+@import url("word_wrap.css");
 
 .footer_container{
 	-webkit-border-radius: 6px;
